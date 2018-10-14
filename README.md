@@ -25,7 +25,8 @@ classical ciphers, it is transliterated using the following rules:
 - Digits are translated to their English equivalent words (e.g. '0' -> "ZERO")
 - All other characters (punctuation) are discarded
 
-The results of this transliteration are output after CTRL-D.
+This transliterated input is then passed to a Caesar Cipher where it is decrypted
+or encrypted using a key given in the command line.
 
 
 # Source Code Layout
@@ -40,12 +41,14 @@ $ tree
 ├ MPAGSCipher
 │   ├ ProcessCommandLine.cpp	  C++ file with processCommandLine function definition
 │   ├ ProcessCommandLine.hpp	  Header file with processCommandLine function declaration
+|   ├ RunCaesarCipher.cpp	  C++ file with runCaesarCipher function definition
+|   ├ RunCaesarCipher.hpp	  Header file with runCaesarCipher function declaration
 │   ├ TransformChar.cpp		  C++ file with transformChar function defintion
 │   └ TransformChar.hpp		  Header file with transformChar function declaration
 ├ mpags-cipher.cpp		  Main program C++ source file
 └ README.md			  This file, describes the project
 
-1 directory, 8 files
+1 directory, 10 files
 ```
 
 # Copying

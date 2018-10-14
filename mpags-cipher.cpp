@@ -10,7 +10,7 @@
 // Project headers
 #include "TransformChar.hpp"
 #include "ProcessCommandLine.hpp"
-
+#include "RunCaesarCipher.hpp"
 
 
 // Main function of the mpags-cipher program
@@ -24,8 +24,10 @@ int main(int argc, char* argv[])
   bool versionRequested {false};
   std::string inputFile {""};
   std::string outputFile {""};
-
-  if(!processCommandLine(cmdLineArgs, helpRequested, versionRequested, inputFile, outputFile)){
+  bool encrypt{true};
+  unsigned long key {0};
+  
+  if(!processCommandLine(cmdLineArgs, helpRequested, versionRequested, encrypt, key, inputFile, outputFile)){
     return 1;
   }
 
@@ -41,7 +43,10 @@ int main(int argc, char* argv[])
       << "  -i FILE          Read text to be processed from FILE\n"
       << "                   Stdin will be used if not supplied\n\n"
       << "  -o FILE          Write processed text to FILE\n"
-      << "                   Stdout will be used if not supplied\n\n";
+      << "                   Stdout will be used if not supplied\n\n"
+      << "  -k KEY           Use key from KEY in Caesar Cipher\n\n"
+      << "  --encrypt        Encrypt the input text\n\n"
+      << "  --decrypt        Decrypt the input text\n\n";
     // Help requires no further action, so return from main
     // with 0 used to indicate success
     return 0;
@@ -53,7 +58,7 @@ int main(int argc, char* argv[])
   // Like help, requires no further action,
   // so return from main with zero to indicate success
   if (versionRequested) {
-    std::cout << "0.1.0" << std::endl;
+    std::cout << "0.2.0" << std::endl;
     return 0;
   }
 
@@ -85,13 +90,18 @@ int main(int argc, char* argv[])
 	inputText += transformChar(inputChar);
       }
   }
+
+  
+  //Encrypt or decrypt the input text
+  std::cout << (encrypt ? "Encrypting " : "Decrypting ") << "input using key =" << key << std::endl;
+  std::string outputText = runCaesarCipher( inputText, key, encrypt);
   
 
   // Output the transliterated text
   if (!outputFile.empty()) {
     std::ofstream out_file{outputFile};
     if (out_file.good()){
-      out_file << inputText;
+      out_file << outputText;
     }
     else{
       std::cerr << "[error] Output file ('"
@@ -101,7 +111,7 @@ int main(int argc, char* argv[])
     }
   }
   else{
-    std::cout << inputText << std::endl;
+    std::cout << outputText << std::endl;
   }
 
   return 0;
