@@ -9,12 +9,11 @@ Windows platforms with Visual Studio 2015 or better are also expected to
 work, but not tested.
 
 To build from a clone of this repository, open a terminal window
-and change directory into that holding this README. Then run:
+and change directory into that you wish to compile to. Then run:
 ```
-$ ls
-LICENSE          README.md        mpags-cipher.cpp
-$ g++ -std=c++11 -Wall -Wextra -Werror -Wfatal-errors -pedantic -Wshadow -o mpags-cipher mpags-cipher.cpp
-$ ./mpags-cipher
+$ cmake 
+$ ./mpags-cipher /path/to/source/dir
+$ make
 ```
 
 If no input file is supplied, `mpags-cipher` will wait for user input
@@ -30,18 +29,23 @@ The results of this transliteration are output after CTRL-D.
 
 
 # Source Code Layout
-Under this directory, the code and associated files are organised as
-follows:
+The code and associated files are organised as follows:
 
 ```
 $ tree
-.
-└── MPAGS-Code
-    ├── LICENSE             License file, in our case MIT
-    ├── mpags-cipher.cpp    Main program C++ source file
-    └── README.md           This file, describes the project
 
-1 directory, 3 files
+.
+├ CMakeLists.txt	          make file giving compilation instructions
+├ LICENSE			  License file, in out case MIT
+├ MPAGSCipher
+│   ├ ProcessCommandLine.cpp	  C++ file with processCommandLine function definition
+│   ├ ProcessCommandLine.hpp	  Header file with processCommandLine function declaration
+│   ├ TransformChar.cpp		  C++ file with transformChar function defintion
+│   └ TransformChar.hpp		  Header file with transformChar function declaration
+├ mpags-cipher.cpp		  Main program C++ source file
+└ README.md			  This file, describes the project
+
+1 directory, 8 files
 ```
 
 # Copying

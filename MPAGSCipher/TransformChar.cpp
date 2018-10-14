@@ -2,6 +2,8 @@
 
 #include <cctype>
 
+#include "TransformChar.hpp"  //Not strictly necessary but ensures consistency 
+
 std::string transformChar( const char in_char){
   /*Capitalises and returns any alphabetic characters and transliterates digits to English words
     and returns them capitalised*/
