@@ -93,8 +93,8 @@ int main(int argc, char* argv[])
 
   
   //Encrypt or decrypt the input text
-  std::cout << (encrypt ? "Encrypting " : "Decrypting ") << "input using key =" << key << std::endl;
-  std::string outputText = runCaesarCipher( inputText, key, encrypt);
+  std::cout << (encrypt ? "Encrypting " : "Decrypting ") << "input using key = " << key << std::endl;
+  std::string outputText { runCaesarCipher( inputText, key, encrypt) };
   
 
   // Output the transliterated text
