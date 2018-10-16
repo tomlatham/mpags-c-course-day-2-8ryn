@@ -24,6 +24,7 @@ std::string runCaesarCipher( const std::string& inputText,
       ++pos;
     }
     // Makes shift +ve or -ve depending on encrypt/decrypt
+    // -ve is implemented as 26 - key%26 to avoid using % on any negative values below
     int shift = encrypt ? key : 26 - key%26;
     // Apply the shift (+ve or –ve depending on encrypt/decrypt)
     // to the position, handling correctly potential wrap-around
